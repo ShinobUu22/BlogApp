@@ -1,8 +1,8 @@
-import { httpRouter } from "convex/server";
-import { httpAction } from "./_generated/server";
 import { WebhookEvent } from '@clerk/nextjs/server';
+import { httpRouter } from "convex/server";
 import { Webhook } from "svix";
 import { internal } from "./_generated/api";
+import { httpAction } from "./_generated/server";
 
 const validatePayload = async (req: Request): Promise<WebhookEvent | undefined> => {
     const payload = await req.text();
@@ -31,7 +31,7 @@ const handleClerkWebhook = httpAction(async (ctx, req) => {
 
     switch (event.type) {
         case "user.created":
-            const existingUser = await ctx.runQuery(internal.users.get, { clerkId: event.data.id });
+            const existingUser = await ctx.runQuery(internal.users.getUser, { clerkId: event.data.id });
             if (existingUser) {
                 console.log(`User already exists: ${event.data.id}`);
                 break; // Important to break here
