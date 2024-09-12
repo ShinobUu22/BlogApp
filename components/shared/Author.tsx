@@ -1,15 +1,15 @@
+import { api } from "@/convex/_generated/api";
+import { useQuery } from "convex/react";
 import Image from "next/image";
 import React from "react";
 import { BlogPost, user } from "../interface/interfaces";
-import { useQuery } from "convex/react";
-import { api } from "@/convex/_generated/api";
 
 interface Props {
   author?: BlogPost;
 }
 
 const Author: React.FC<Props> = ({ author }) => {
-  const user = useQuery(api.users.getUser) as user[] | undefined;
+  const user = useQuery(api.users.getUsers) as user[] | undefined;
   const authImg = user?.find((u) => u.username === author?.userId)?.imageUrl;
   const authName = user?.find((u) => u.username === author?.userId)?.username;
 

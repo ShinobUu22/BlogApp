@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { internalMutation, internalQuery } from "./_generated/server";
+import { internalMutation, internalQuery, query } from "./_generated/server";
 
 
 
@@ -25,3 +25,9 @@ export const getUser = internalQuery({
             .first();
     },
 });
+
+export const getUsers = query({
+    handler: async (ctx) => {
+        return ctx.db.query("users").collect
+    }
+})

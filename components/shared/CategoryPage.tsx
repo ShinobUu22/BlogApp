@@ -1,18 +1,18 @@
-import React from "react";
-import { BlogPost, user } from "../interface/interfaces";
+import { api } from "@/convex/_generated/api";
+import { useQuery } from "convex/react";
+import moment from "moment";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useQuery } from "convex/react";
-import { api } from "@/convex/_generated/api";
+import React from "react";
 import { MdDateRange } from "react-icons/md";
-import moment from "moment";
+import { BlogPost, user } from "../interface/interfaces";
 interface Props {
   post: BlogPost;
 }
 
 const CategoryTsx: React.FC<Props> = ({ post }) => {
   const router = useRouter();
-  const User = useQuery(api.users.getUser) as user[] | undefined;
+  const User = useQuery(api.users.getUsers) as user[] | undefined;
   const author = User?.filter((u) => u._id === post.userId);
   const image = author?.find((i) => i.imageUrl)?.imageUrl;
 

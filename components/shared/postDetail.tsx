@@ -1,18 +1,18 @@
-import React from "react";
-import { BlogPost, user } from "../interface/interfaces";
-import Image from "next/image";
-import { MdDateRange } from "react-icons/md";
-import moment from "moment";
-import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import ToHtml from "@/utils/toHtml";
+import { useQuery } from "convex/react";
+import moment from "moment";
+import Image from "next/image";
+import React from "react";
+import { MdDateRange } from "react-icons/md";
+import { BlogPost, user } from "../interface/interfaces";
 
 interface Props {
   post?: BlogPost;
 }
 
 const PostDetail: React.FC<Props> = ({ post }) => {
-  const User = useQuery(api.users.getUser) as user[] | undefined;
+  const User = useQuery(api.users.getUsers) as user[] | undefined;
   const author = User?.filter((u) => u._id === post?.userId);
   const image = author?.find((i) => i.imageUrl)?.imageUrl;
   if (!post) {
